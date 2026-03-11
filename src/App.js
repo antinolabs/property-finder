@@ -131,7 +131,6 @@ export default function App() {
                     >
                         <div className="page-header">
                             <h1>Extract Actions</h1>
-                            <div className="badge">Flow 1</div>
                         </div>
                         <div className="card">
                             <div className="input-group">
@@ -159,7 +158,7 @@ export default function App() {
                                     'https://nisar1234.app.n8n.cloud/webhook/extract-actions',
                                     { meetingDate: formData.meetingDate, docUrl: formData.docUrl },
                                     false, null, 'POST',
-                                    '✅ Workflow executed! Check your Action Items sheet and Stack for the extracted items.'
+                                    '✅ Workflow executed! Check your Action Items sheet and Slack for the extracted items.'
                                 )}
                             >
                                 <Play size={18} /> {isLoading('extract') ? 'Running...' : 'Run Flow'}
@@ -176,7 +175,7 @@ export default function App() {
                                     1. Enter the meeting date and paste the Google Doc URL above.<br />
                                     2. Click <strong>"Run Flow"</strong> to start the workflow.<br />
                                     3. n8n will extract action items from your document.<br />
-                                    4. Check your <strong>Action Items sheet</strong> and <strong>Stack</strong> for the results.
+                                    4. Check your <strong>Action Items sheet</strong> and <strong>Slack</strong> for the results.
                                 </p>
                             </div>
                         </div>
@@ -192,7 +191,6 @@ export default function App() {
                     >
                         <div className="page-header">
                             <h1>Pre Read</h1>
-                            <div className="badge">Flow 2</div>
                         </div>
                         <div className="card">
                             <button
@@ -200,11 +198,21 @@ export default function App() {
                                 disabled={isLoading('preread')}
                                 onClick={() => triggerWebhook('preread', 'https://nisar1234.app.n8n.cloud/webhook/pre-read', {}, false, null, 'GET')}
                             >
-                                <BookOpen size={18} /> {isLoading('preread') ? 'Running...' : 'Run Pre Read Button'}
+                                <BookOpen size={18} /> {isLoading('preread') ? 'Running...' : 'Run Pre Read'}
                             </button>
                             {getStatus('preread').message && (
                                 <div className={`status-msg ${getStatus('preread').type}`}>{getStatus('preread').message}</div>
                             )}
+                            {/* Instruction box */}
+                            <div style={{ marginTop: '1.2rem', padding: '1rem', background: '#f0f4ff', borderLeft: '4px solid var(--accent)', borderRadius: '6px' }}>
+                                <p style={{ fontSize: '0.85rem', color: '#4b5563', margin: 0, lineHeight: '1.6' }}>
+                                    <strong>How it works:</strong><br />
+                                    1. Click <strong>"Run Pre Read"</strong> to start the workflow.<br />
+                                    2. n8n will generate the <strong>Pre Read summary</strong> from the available data.<br />
+                                    3. The summary is sent to the <strong>admin for review and approval</strong>.<br />
+                                    4. Once approved, the <strong>final Pre Read is posted to the Slack channel</strong>.
+                                </p>
+                            </div>
                         </div>
                     </motion.div>
                 );
@@ -218,7 +226,6 @@ export default function App() {
                     >
                         <div className="page-header">
                             <h1>Update Google Sheets</h1>
-                            <div className="badge">Sync</div>
                         </div>
 
                         {/* Team Members Section */}
