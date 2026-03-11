@@ -272,7 +272,7 @@ export default function App() {
             <div className="sidebar">
                 <div className="logo">
                     <LayoutDashboard size={24} style={{ marginRight: '10px', verticalAlign: 'middle' }} />
-                    <span>MEETING DASHBOARD</span>
+                    <span>PROPERTY FINDER</span>
                 </div>
                 <nav className="nav-links">
                     {pages.map((page) => (
